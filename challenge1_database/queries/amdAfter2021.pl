@@ -28,8 +28,8 @@ For every computing platform returns:
 - Type of Computing Platform as an atom.
 ------------------------------------------------------------------------------
 */
-amdAfter2021(Trademark, Name, Serial, TypeOfCP) :-
-    computingPlatform(Trademark, Name, Serial, YearOfAcq, _, CPUManufacturer, _, _, TypeOfCP, _, _),
+amdAfter2021(Trademark, Name, Serial, YearOfAcq) :-
+    computingPlatform(Trademark, Name, Serial, YearOfAcq, _, CPUManufacturer, _, _, _, _, _),
     YearOfAcq > 2021,
     CPUManufacturer == amd.
 
@@ -39,7 +39,7 @@ amdAfter2021List
 What does it do?: It takes care of finding all the computing platforms using
 the conditions that comes from the query amdAfter2021, and putting all of 
 them in a list where the information is encapsulated in the format: 
-"(Trademark|Name|Serial|TypeOfCP)".
+"(Trademark|Name|Serial|YearOfAcq)".
 
 Inputs:
 A function findall() with the next data:
@@ -49,13 +49,13 @@ A function findall() with the next data:
 
 Output:
 A list with all the computing platforms according to the conditions where 
-each computing platforms is in the format:"(Trademark|Name|Serial|TypeOfCP)".
+each computing platforms is in the format:"(Trademark|Name|Serial|YearOfAcq)".
 ------------------------------------------------------------------------------
 */
 amdAfter2021List(List) :-
     findall(
-        (Trademark|Name|Serial|TypeOfCP),
-        amdAfter2021(Trademark, Name, Serial, TypeOfCP),
+        (Trademark|Name|Serial|YearOfAcq),
+        amdAfter2021(Trademark, Name, Serial, YearOfAcq),
         List
     ).
 
@@ -75,7 +75,7 @@ amdAfter2021List.
 amdAfter2021PrintList :-
     amdAfter2021List(List),
     writeln('--------------------------------------------'),
-    writeln('Trademark | Name | Serial number | Type of CP'),
+    writeln('Trademark | Name | Serial number | Year of acquisition'),
     printList(List),
     writeln('--------------------------------------------').
 

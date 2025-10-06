@@ -6,10 +6,9 @@ and the amount of information coming from them.
 
 /*
 ------------------------------------------------------------------------------
-tablet2PlusGBRam
+cpHDBetween
 What does it do?: It takes care of finding all the computing platforms where
-the Type of computing platform is a tablet and the Ram capcity installed is 
-over 2 Gyga Bytes.
+the hard disk capacity is between 32 and 512 GB.
 
 Inputs:
 It receives all the data of Computing Platforms from facts.pl but only takes
@@ -17,28 +16,27 @@ into account these informations of every fact:
 - Trademark as an atom.
 - Name as an atom.
 - Serial as an atom.
-- RamCapacityGB as an integer.
-- Type of Computing Platform as an atom.
+- HDCapacityGB as an integer.
 
 Outputs:
 For every computing platform returns:
 - Trademark as an atom.
 - Name as an atom.
 - Serial as an atom.
-- RamCapacityGB as an integer.
+- HDCapacityGB as an integer.
 ------------------------------------------------------------------------------
 */
-tablet2PlusGBRam(Trademark, Name, Serial, RamCapacityGB) :-
-    computingPlatform(Trademark, Name, Serial, _, RamCapacityGB, _, _, _, TypeOfCP, _, _),
-    RamCapacityGB > 2,
-    TypeOfCP == tablet.
+cpHDBetween(Trademark, Name, Serial, HDCapacityGB) :-
+    computingPlatform(Trademark, Name, Serial, _, _, _, _, HDCapacityGB, _, _, _),
+    HDCapacityGB > 32,
+    HDCapacityGB < 512.
 /*
 ------------------------------------------------------------------------------
-tablet2PlusGBRamList
+cpHDBetweenList
 What does it do?: It takes care of finding all the computing platforms using
-the conditions that comes from the query tablet2PlusGBRam, and putting all of 
+the conditions that comes from the query cpHDBetween, and putting all of 
 them in a list where the information is encapsulated in the format: 
-"(Trademark|Name|Serial|RamCapacityGB)".
+"(Trademark|Name|Serial|HDCapacityGB)".
 
 Inputs:
 A function findall() with the next data:
@@ -49,33 +47,33 @@ A function findall() with the next data:
 Output:
 A list with all the computing platforms according to the conditions where 
 each computing platforms is in the format:
-"(Trademark|Name|Serial|RamCapacityGB)".
+"(Trademark|Name|Serial|HDCapacityGB)".
 ------------------------------------------------------------------------------
 */
-tablet2PlusGBRamList(List) :-
+cpHDBetweenList(List) :-
     findall(
-        (Trademark|Name|Serial|RamCapacityGB),
-        tablet2PlusGBRam(Trademark, Name, Serial,RamCapacityGB),
+        (Trademark|Name|Serial|HDCapacityGB),
+        cpHDBetween(Trademark, Name, Serial,HDCapacityGB),
         List
     ).
 
 /*
 ------------------------------------------------------------------------------
-tablet2PlusGBRamPrintList
+cpHDBetweenPrintList
 What does it do?: It takes care of printing all the computing platforms with 
 a header indicating the order in which the information is displayed and a se-
 paration line to distinguish better each computing platform.
 
 Inputs:
-- The list from tablet2PlusGBRamList
+- The list from cpHDBetweenList
 - A subfunction that takes care of printing each computing platform from the 
-tablet2PlusGBRamList.
+cpHDBetweenList.
 ------------------------------------------------------------------------------
 */
-tablet2PlusGBRamPrintList :-
-    tablet2PlusGBRamList(List),
+cpHDBetweenPrintList :-
+    cpHDBetweenList(List),
     writeln('--------------------------------------------'),
-    writeln('Trademark | Name | Serial number | Ram capacity in GB'),
+    writeln('Trademark | Name | Serial number | Hard disk capacity in GB'),
     printList(List),
     writeln('--------------------------------------------').
 
@@ -87,7 +85,7 @@ What does it do?: It takes care of printing all the computing platforms passed
 in the list using recursion
 
 Inputs:
-- The list from tablet2PlusGBRamList
+- The list from cpHDBetweenList
 ------------------------------------------------------------------------------
 */
 printList([]).
