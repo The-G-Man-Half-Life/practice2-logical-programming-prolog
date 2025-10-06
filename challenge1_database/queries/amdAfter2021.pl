@@ -84,7 +84,7 @@ amdAfter2021PrintList :-
 ------------------------------------------------------------------------------
 printList
 What does it do?: It takes care of printing all the computing platforms passed
-in the list using recursion
+in the list using recursion.
 
 Inputs:
 - The list from amdAfter2021List

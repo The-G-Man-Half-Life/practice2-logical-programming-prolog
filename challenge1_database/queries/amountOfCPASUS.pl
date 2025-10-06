@@ -6,10 +6,9 @@ and the amount of information coming from them.
 
 /*
 ------------------------------------------------------------------------------
-tablet2PlusGBRam
+amountOfCPASUS
 What does it do?: It takes care of finding all the computing platforms where
-the Type of computing platform is a tablet and the Ram capcity installed is 
-over 2 Gyga Bytes.
+the Trademark is ASUS.
 
 Inputs:
 It receives all the data of Computing Platforms from facts.pl but only takes
@@ -17,28 +16,27 @@ into account these informations of every fact:
 - Trademark as an atom.
 - Name as an atom.
 - Serial as an atom.
-- RamCapacityGB as an integer.
-- TypeOfCP as an atom.
+- YearOfAcq as an integer.
+- TypeOfCP as an atom. 
 
 Outputs:
 For every computing platform returns:
-- Trademark as an atom.
 - Name as an atom.
 - Serial as an atom.
-- RamCapacityGB as an integer.
+- YearOfAcq as an integer.
+- TypeOfCP as an atom. 
 ------------------------------------------------------------------------------
 */
-tablet2PlusGBRam(Trademark, Name, Serial, RamCapacityGB) :-
-    computingPlatform(Trademark, Name, Serial, _, RamCapacityGB, _, _, _, TypeOfCP, _, _),
-    RamCapacityGB > 2,
-    TypeOfCP == tablet.
+amountOfCPASUS(Name, Serial, YearOfAcq, TypeOfCP) :-
+    computingPlatform(Trademark, Name, Serial, YearOfAcq, _, _, _, _, TypeOfCP, _, _),
+    Trademark == 'ASUS'.
 /*
 ------------------------------------------------------------------------------
-tablet2PlusGBRamList
+amountOfCPASUSList
 What does it do?: It takes care of finding all the computing platforms using
-the conditions that comes from the query tablet2PlusGBRam, and putting all of 
+the conditions that comes from the query amountOfCPASUS, and putting all of 
 them in a list where the information is encapsulated in the format: 
-"(Trademark|Name|Serial|RamCapacityGB)".
+"(Name|Serial|YearOfAcq|TypeOfCP)".
 
 Inputs:
 A function findall() with the next data:
@@ -49,33 +47,41 @@ A function findall() with the next data:
 Output:
 A list with all the computing platforms according to the conditions where 
 each computing platforms is in the format:
-"(Trademark|Name|Serial|RamCapacityGB)".
+"(Name|Serial|YearOfAcq|TypeOfCP)".
 ------------------------------------------------------------------------------
 */
-tablet2PlusGBRamList(List) :-
+
+amountOfCPASUSList(List) :-
     findall(
-        (Trademark|Name|Serial|RamCapacityGB),
-        tablet2PlusGBRam(Trademark, Name, Serial,RamCapacityGB),
+        (Name|Serial|YearOfAcq|TypeOfCP),
+        amountOfCPASUS(Name, Serial, YearOfAcq, TypeOfCP),
         List
     ).
 
 /*
 ------------------------------------------------------------------------------
-tablet2PlusGBRamPrintList
-What does it do?: It takes care of printing all the computing platforms with 
-a header indicating the order in which the information is displayed and a se-
+amountOfCPASUSPrintList
+What does it do?: It takes care of printing the total amount of computing 
+platforms from ASUS and a list with all the computing platforms with a header 
+indicating the order in which the information is displayed and a se-
 paration line to distinguish better each computing platform.
 
 Inputs:
-- The list from tablet2PlusGBRamList
+- The list from amountOfCPASUSList.
+- The total amount of ASUS Computing platforms from countList.
 - A subfunction that takes care of printing each computing platform from the 
-tablet2PlusGBRamList.
+amountOfCPASUSList.
 ------------------------------------------------------------------------------
 */
-tablet2PlusGBRamPrintList :-
-    tablet2PlusGBRamList(List),
+amountOfCPASUSPrintList :-
+    amountOfCPASUSList(List),
+    countList(List, N),
     writeln('--------------------------------------------'),
-    writeln('Trademark | Name | Serial number | Ram capacity in GB'),
+    format('This is the amount of ASUS computing platforms: ~w~n', [N] ),
+    writeln('--------------------------------------------'),
+    writeln('These are all of the  ASUS computing platforms: '),
+    writeln('--------------------------------------------'),
+    writeln('Name | Serial number | Year of acquisition | Type of Computing platform'),
     printList(List),
     writeln('--------------------------------------------').
 
@@ -87,7 +93,7 @@ What does it do?: It takes care of printing all the computing platforms passed
 in the list using recursion.
 
 Inputs:
-- The list from tablet2PlusGBRamList.
+- The list from amountOfCPASUSList.
 ------------------------------------------------------------------------------
 */
 printList([]).
@@ -95,3 +101,18 @@ printList([X|Xs]) :-
     writeln('--------------------------------------------'),
     writeln(X),
     printList(Xs).
+
+/*
+------------------------------------------------------------------------------
+countList
+What does it do?: It takes care of counting the total of computing platforms
+passed in the list using recursion.
+
+Inputs:
+- The list from amountOfCPASUSList
+------------------------------------------------------------------------------
+*/
+countList([], 0).
+countList([_|T], N) :-
+    countList(T, N1),
+    N is N1 + 1.
