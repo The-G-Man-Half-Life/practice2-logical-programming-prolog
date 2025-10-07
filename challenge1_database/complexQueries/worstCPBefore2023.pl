@@ -13,7 +13,7 @@ based on its Serial number and a punctuation obtained from multiplying an impor-
 tance rate with every information considered important and then summing the total 
 amount of points that were obtained during the procces and then finally dividing
 the total with 100 to reduce the size of the value. Also this query only takes into
-account the Computing platforms from after 2023.
+account the Computing platforms from before 2023.
 
 Inputs:
 It receives all the data of Computing Platforms from facts.pl but only takes
@@ -34,7 +34,7 @@ For every computing platform returns:
 restructuratedCP(Serial, Punctuation) :-
     computingPlatform(_, _, Serial, YearOfAcq, RamCapacityGB, _,
                       AmountOfCPUCores, HDCapacityGB, _, _, VRamCapacityGB),
-    YearOfAcq > 2023,
+    YearOfAcq < 2023,
     Punctuation is (RamCapacityGB * 1.2 + AmountOfCPUCores * 300 + HDCapacityGB * 1.5
                    + VRamCapacityGB * 50)/100.
     
@@ -49,7 +49,7 @@ them in a list where the information is encapsulated in the format:
 Inputs:
 A function findall() with the next data:
     - Format in which each computing platform will be encapsulated.
-    - New structure in which all computing platforms will be saved no.
+    - New structure in which all computing platforms will be saved now.
     - Way in which the facts will be encapsulated (as a list).
 
 Output:
@@ -67,48 +67,48 @@ restructuratedCPList(List) :-
 
 /*
 ------------------------------------------------------------------------------
-maximumComputingPlatform
+lowestComputingPlatform
 What does it do?: It takes care of finding the computing platform with the 
-highest punctuation so it can determine which device is the best using recursion. 
+lowest punctuation so it can determine which device is the worst using recursion. 
 
 Inputs:
 - The list from restructuratedCPList.
 
 Output:
-- A restructuratedCP element that is the Computing platform with the highest
+- A restructuratedCP element that is the Computing platform with the lowest
 punctuation.
 ------------------------------------------------------------------------------
 */
-maximumComputingPlatform([(Serial, Punctuation)], Serial, Punctuation).
+lowestComputingPlatform([(Serial, Punctuation)], Serial, Punctuation).
 
-maximumComputingPlatform([(SerialSub1, PunctuationSub1)|Rest], SerialMax, PunctuationMax) :-
-    maximumComputingPlatform(Rest, SerialSub2, PunctuationSub2),
-    (PunctuationSub1 > PunctuationSub2 ->
-        SerialMax = SerialSub1, PunctuationMax = PunctuationSub1
+lowestComputingPlatform([(SerialSub1, PunctuationSub1)|Rest], SerialLow, PunctuationLow) :-
+    lowestComputingPlatform(Rest, SerialSub2, PunctuationSub2),
+    (PunctuationSub1 < PunctuationSub2 ->
+        SerialLow = SerialSub1, PunctuationLow = PunctuationSub1
     ;
-        SerialMax = SerialSub2, PunctuationMax = PunctuationSub2
+        SerialLow = SerialSub2, PunctuationLow = PunctuationSub2
     ).
 
 /*
 ------------------------------------------------------------------------------
-findBestCP2023After
+findworstCP2023
 What does it do?: It takes care of connecting restructuratedCPList,
-maximumComputingPlatform and computing platform so it can obtain obtain all of
-the data related to the best computing platform. 
+lowestComputingPlatform and computingPlatform so it can obtain obtain all of
+the data related to the worst computing platform. 
 
 Inputs:
 It receives 3 queries and each one takes care of generating inputs and outputs
 to cooperate with each other.
 restructuratedCPList takes care of generating the list with the new format of
 the computing platform.
-maximumComputingPlatform takes care of receiving the list with the new format
+lowestComputingPlatform takes care of receiving the list with the new format
 to return the serial number and the punctuation obtained
 and computingPlatform that takes care of returning all the information except
 CPUManufacturer, YearOfAcquisition and GPU Manufacturer as these informations
 were not taken in count for the punctuation.
 
 Outputs:
-For the top computing Platform returns this info:
+For the lowest computing Platform returns this info:
 - Trademark as an atom.
 - Name as an atom.
 - Serial as an atom.
@@ -120,28 +120,28 @@ For the top computing Platform returns this info:
 - Punctuation as a double.
 ------------------------------------------------------------------------------
 */
-findBestCP2023After(Trademark, Name, Serial, RamCapacityGB, AmountOfCPUCores,
+findWorstCPBefore2023(Trademark, Name, Serial, RamCapacityGB, AmountOfCPUCores,
                     HDCapacityGB, TypeOfCP, VRamCapacityGB, Punctuation) :-
     restructuratedCPList(List),
-    maximumComputingPlatform(List, Serial, Punctuation),
+    lowestComputingPlatform(List, Serial, Punctuation),
     computingPlatform(Trademark, Name, Serial, _, RamCapacityGB, _, 
                       AmountOfCPUCores, HDCapacityGB, TypeOfCP, _, 
                       VRamCapacityGB).
 
 /*
-------------------------------------------------------------------------------
-bestComputingPlatformPrint
+-----------------------------------------------------------------------------
+worstComputingPlatformPrint
 What does it do?: It takes care of printing all the information of the compu-
-ting platform with the best punctuation.
+ting platform with the worst punctuation.
 
 Inputs:
-- The Computing platform with the best punctuation.
+- The Computing platform with the worst punctuation.
 ------------------------------------------------------------------------------
 */
-bestComputingPlatformPrint :-
-    findBestCP2023After(TradeMark, Name, Serial, RamCapacityGB,AmountOfCPUCores,HDCapacityGB, TypeOfCP, VramCapacityGB,Punctuation),
+worstComputingPlatformPrint :-
+    findWorstCPBefore2023(TradeMark, Name, Serial, RamCapacityGB,AmountOfCPUCores,HDCapacityGB, TypeOfCP, VramCapacityGB,Punctuation),
     writeln('--------------------------------------------'),
-    writeln('The most powerful computing platform is the: '),
+    writeln('The least powerful computing platform before 2023 is the: '),
     writeln(Name),
     write('TradeMark: '),
     writeln(TradeMark),
