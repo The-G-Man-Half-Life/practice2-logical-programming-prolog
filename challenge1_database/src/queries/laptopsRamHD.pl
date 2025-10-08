@@ -1,9 +1,17 @@
 /* 
+This is the exportation module which will be used to export all the functions
+so they can be used in the main more easily
+*/
+:- module(laptopsRamHD, [
+    laptopsRamHD/4,
+    laptopsRamHDList/1,
+    laptopsRamHDPrintList/0
+]).
+/* 
 importation of facts from the facts archive indicating the type of the facts
 and the amount of information coming from them.
 */
 :- use_module('../facts', [computingPlatform/11]).
-
 /*
 ------------------------------------------------------------------------------
 laptopsRamHD
