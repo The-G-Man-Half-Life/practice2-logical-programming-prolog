@@ -1,4 +1,14 @@
 /* 
+This is the exportation module which will be used to export all the functions
+so they can be used in the main more easily.
+*/
+:- module(mostCommRamVRamInGBComb, [
+    onlyRamVRamStructure/2,
+    onlyRamVRamCombosList/1,
+    mostCommonCombo/2,
+    ramVRamMostCommonComboPrint/0
+]).
+/* 
 importation of facts from the facts archive indicating the type of the facts
 and the amount of information coming from them.
 */

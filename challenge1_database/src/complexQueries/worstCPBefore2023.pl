@@ -1,4 +1,15 @@
 /* 
+This is the exportation module which will be used to export all the functions
+so they can be used in the main more easily.
+*/
+:- module(worstCPBefore2023, [
+    restructuratedCP/2,
+    restructuratedCPList/1,
+    lowestComputingPlatform/3,
+    findWorstCPBefore2023/9,
+    worstComputingPlatformPrint/0
+]).
+/* 
 importation of facts from the facts archive indicating the type of the facts
 and the amount of information coming from them.
 */

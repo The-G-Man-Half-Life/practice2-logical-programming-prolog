@@ -1,4 +1,15 @@
 /* 
+This is the exportation module which will be used to export all the functions
+so they can be used in the main more easily.
+*/
+:- module(bestCPAfter2023, [
+    restructuratedCP/2,
+    restructuratedCPList/1,
+    maximumComputingPlatform/3,
+    findBestCPAfter2023/9,
+    bestComputingPlatformPrint/0
+]).
+/* 
 importation of facts from the facts archive indicating the type of the facts
 and the amount of information coming from them.
 */
@@ -120,7 +131,7 @@ For the top computing Platform returns this info:
 - Punctuation as a double.
 ------------------------------------------------------------------------------
 */
-findBestCP2023After(Trademark, Name, Serial, RamCapacityGB, AmountOfCPUCores,
+findBestCPAfter2023(Trademark, Name, Serial, RamCapacityGB, AmountOfCPUCores,
                     HDCapacityGB, TypeOfCP, VRamCapacityGB, Punctuation) :-
     restructuratedCPList(List),
     maximumComputingPlatform(List, Serial, Punctuation),
@@ -139,7 +150,7 @@ Inputs:
 ------------------------------------------------------------------------------
 */
 bestComputingPlatformPrint :-
-    findBestCP2023After(TradeMark, Name, Serial, RamCapacityGB,AmountOfCPUCores,HDCapacityGB, TypeOfCP, VramCapacityGB,Punctuation),
+    findBestCPAfter2023(TradeMark, Name, Serial, RamCapacityGB,AmountOfCPUCores,HDCapacityGB, TypeOfCP, VramCapacityGB,Punctuation),
     writeln('--------------------------------------------'),
     writeln('The most powerful computing platform after 2023 is the: '),
     writeln(Name),
