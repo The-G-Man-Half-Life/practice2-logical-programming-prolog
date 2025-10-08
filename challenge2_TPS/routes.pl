@@ -132,12 +132,13 @@ filter_Departure_Time([route_Summary(Route, Cost, Time) | Rest], Min_Departure, 
 %		--- CALLER INDEPENDENT FUNCTIONS ---
 % Calculates ALL Available Routes Between Two Cities
 %	With Time Filter
-% print_All([]).
+% print_All(Origin, Destiny, Min_Departure_Time, Max_Departure_Time).
 print_All(Origin, Destiny, Min_Departure, Max_Departure) :-
     find_All_Routes(Origin, Destiny, Routes),
     filter_Departure_Time(Routes, Min_Departure, Max_Departure, Filtered),
     print_Routes(Filtered).
 % 	Without Time Filter
+% print_All(Origin, Destiny).
 print_All(Origin, Destiny) :-
     find_All_Routes(Origin, Destiny, Routes),
     print_Routes(Routes).
@@ -145,12 +146,14 @@ print_All(Origin, Destiny) :-
 
 % Calculates CHEAPEST Route Between Two Cities
 % 	With Time Filter
+% print_Cheapest(Origin, Destiny, Min_Departure_Time, Max_Departure_Time).
 print_Cheapest(Origin, Destiny, Min_Departure, Max_Departure) :-
 	find_All_Routes(Origin, Destiny, Routes),
     filter_Departure_Time(Routes, Min_Departure, Max_Departure, Filtered),
     find_Optimal(Filtered, cost, Result),
     print_Routes([Result]).
 % 	Without Time Filter
+% print_Cheapest(Origin, Destiny).
 print_Cheapest(Origin, Destiny) :-
     find_All_Routes(Origin, Destiny, Routes),
     find_Optimal(Routes, cost, Result),
@@ -159,12 +162,14 @@ print_Cheapest(Origin, Destiny) :-
 
 % Calculates FASTEST Route Between Two Cities
 % 	With Time Filter
+% print_Fastest(Origin, Destiny, Min_Departure_Time, Max_Departure_Time).
 print_Fastest(Origin, Destiny, Min_Departure, Max_Departure) :-
     find_All_Routes(Origin, Destiny, Routes),
     filter_Departure_Time(Routes, Min_Departure, Max_Departure, Filtered),
     find_Optimal(Filtered, time, Result),
     print_Routes([Result]).
 % 	Without Time Filter
+% print_Fastest(Origin, Destiny).
 print_Fastest(Origin, Destiny) :-
     find_All_Routes(Origin, Destiny, Routes),
     find_Optimal(Routes, time, Result),
