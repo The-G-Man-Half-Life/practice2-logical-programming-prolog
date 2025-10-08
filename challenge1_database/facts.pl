@@ -3,9 +3,9 @@
 
 /*
 facts structure:
-computingPlatform(Trademark, Name, SerialNumber, YearOfAcquisition, RAMCapacity_GB,
-         CPUManufacturer, AmountOfCPUCores, HardDiskCapacity_GB,
-         TypeOfComputingPlatform, GPUManufacturer, VRamCapacity_GB).
+computingPlatform(Trademark, Name, SerialNumber, YearOfAcquisition, RAMCapacityGB,
+         CPUManufacturer, AmountOfCPUCores, HardDiskCapacityGB,
+         TypeOfComputingPlatform, GPUManufacturer, VRamCapacityGB).
 */
 
 % Available HP computing platforms
@@ -20,7 +20,7 @@ computingPlatform('HP', 'Pavilion Gaming 15', '5CDS4G7R', 2021, 16, amd, 6, 512,
 computingPlatform('HP', 'Pavilion Gaming 15', '5CDR5H8S', 2020, 8, intel, 4, 512, laptop, nvidia, 4).
 
 % Available Lenovo computing platforms
-computingPlatform('Lenovo', 'Legion Pro 7i Gen 9', 'LNVX9A1Q', 2025, 64, intel, 24, 2048, laptop, nvidia, 24).
+computingPlatform('Lenovo', 'Legion 9i Gen 10', 'LNVX9A1Q', 2025, 192, intel, 24, 8192, laptop, nvidia, 24).
 computingPlatform('Lenovo', 'Legion Slim 7i Gen 8', 'LNVY8B2L', 2024, 32, intel, 16, 1024, laptop, nvidia, 12).
 computingPlatform('Lenovo', 'Legion 5i Gen 7', 'LNVZ7C3M', 2023, 32, intel, 14, 1024, laptop, nvidia, 8).
 computingPlatform('Lenovo', 'LOQ 15 Gen 9', 'LNVW6D4N', 2023, 24, amd, 8, 1024, laptop, nvidia, 6).
@@ -64,7 +64,7 @@ computingPlatform('Razer', 'Tomahawk Elite', 'RZRDC01', 2025, 64, intel, 24, 409
 computingPlatform('Razer', 'Tomahawk ATX', 'RZRDC02', 2024, 32, amd, 16, 2048, desktop, nvidia, 16).
 
 % Available Dell computing platforms
-computingPlatform('Dell', 'Alienware m18 R2', 'DLX9A1Q', 2025, 64, intel, 24, 12288, laptop, nvidia, 24).
+computingPlatform('Dell', 'Alienware m18 R2', 'DLX9A1Q', 2025, 64, intel, 24, 8192, laptop, nvidia, 24).
 computingPlatform('Dell', 'Alienware x16 R2', 'DLY8B2L', 2025, 64, intel, 24, 4096, laptop, nvidia, 24).
 computingPlatform('Dell', 'Alienware x14 R2', 'DLZ7C3M', 2024, 32, intel, 16, 2048, laptop, nvidia, 16).
 computingPlatform('Dell', 'G16 7630', 'DLW6D4N', 2024, 32, intel, 16, 2048, laptop, nvidia, 12).

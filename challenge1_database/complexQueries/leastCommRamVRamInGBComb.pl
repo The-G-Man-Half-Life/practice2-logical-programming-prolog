@@ -56,16 +56,16 @@ onlyRamVRamCombosList(List) :-
 ------------------------------------------------------------------------------
 countOcurrences
 What does it do?: It takes care of counting the total amount of apparitions
-of a certain Ram combo for each brand using the list obtained
+of a certain Ram/VRam combo for each brand using the list obtained
 from onlyRamVRamCombosList all this implementing recursion .
 
 Inputs:
--The list of the RamCapacityGBfacturer and VRamCapacityGBfacturer combos of the brand.
+-The list of the Ram/VRam combos in GB obtained from RamVRamCombosList.
 
 Output:
-A list with the total count of the total amount of apparitions of every CPU/
-GPU Manufacturer combo in the order:
-"((RamCapacityGBfacturer/VRamCapacityGBfacturer),count)".
+A list with the total count of the total amount of apparitions of every Ram/VRam
+combo in the order:
+"((RamCapacity/VRamCapacity),count)".
 ------------------------------------------------------------------------------
 */
 countOccurrences([], []).
@@ -81,32 +81,31 @@ countOccurrences([H|T], [(H,N)|Rest]) :-
 /*
 ---------------------------------------------------------------------------------
 mostCommonCombo
-What does it do?: It takes care of joining onlyBrandsComboList, countOccurrences,
+What does it do?: It takes care of joining onlyRamVRamCombosList, countOccurrences,
 and sort. In this way the first function creates the list which then wil be used
-for the second function to return all the CPU/GPU manufacturers combinations with
-the total amount of counts of that certain combo and finally sort takes care of
+for the second function to return all the RamVRam combinations with the total 
+amount of counts of each certain combo and finally sort takes care of
 sorting all the list elements from countOcurrences list using the second element
 ,the count, as the sorting factor and finally sorting will only take the head 
-element of the sort as it is the CPU/ GPU Manufacturer combination with the 
-biggest count so it can return the trademark with the combo with the highest 
-count and the count. 
+element of the sort as it is the Ram/VRam combination with the biggest count so
+it can return the combination with the highest count and the count.
 
 Inputs:
 Three external functions with the next parameters:
     onlyRamVRamCombosList:
-        O: The trademark which is wished to find the most common combo,
-           The list with all of the CPU/GPU Combination.
+        O: The list with all of the Ram/VRam combos possible from the 
+           facts file.
     countOccurences:
         I: The list from onlyRamVRamCombosList.
-        O: A new list but only with unique CPU/GPU combos and the total amount 
-           of apparitions.
+        O: A new list but only with unique Ram/VRam combos and the total amount 
+           of apparitions of that certain combo.
     sort:
-        I:The list generated from countOccurrences.
-        O: The CPU/GPU Manufacturer combination with the highest count.
+        I: The list generated from countOccurrences.
+        O: The Ram/VRam combination with the highest count and the count.
 
 
 Output:
-The Trademark with the combo with the highest count and the obtained count.
+The combo with the highest count and the obtained count.
 ------------------------------------------------------------------------------
 */
 mostCommonCombo(Combo, Count) :-
@@ -117,19 +116,17 @@ mostCommonCombo(Combo, Count) :-
 
 /*
 ------------------------------------------------------------------------------
-allRamVRamMostCommonCombosPrintList 
-What does it do?: It takes care of printing a list with all the Trademarks,
-best CPU/GPU manufacturers combo for each brand and the total amount of 
-apparitions of that certain combo, with a header indicating the order in which 
-the information is displayed and a separation line to distinguish better each
-information. 
+RamVRamMostCommonCombosPrint
+What does it do?: It takes care of printing the most common combo of Ram/VRam
+found among all the computing platforms using several writelns to display it
+properly. 
 
 Inputs:
-- The list from allbrandsMostCommon.
-- A subfunction that takes care of printing the information. 
+- The Ram/VRam combination with the highest count.
+- The count of that combination. 
 ------------------------------------------------------------------------------
 */
-allRamVRamMostCommonCombosPrintList :-
+ramVRamMostCommonComboPrint :-
     mostCommonCombo((Ram,VRam), Count),
     writeln('--------------------------------------------'),
     write('The most common combination of Ram and VRam \ncapacity in GB is respectively: '),
