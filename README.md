@@ -232,8 +232,10 @@ This project contains 2 distinct modules both having distinct knowledge database
     of each other.
   - Good expression and communication was vital to make a
     good video.
-```bash
+    
 ## tests 
+
+```bash
 Output of `amdAfter2021PrintList/0`
 --------------------------------------------
 Trademark | Name | Serial number | Year of acquisition
@@ -388,8 +390,6 @@ powershell or VSC code terminal for better watch of code and execution.
 
 ## How to Use
 - Watch the bash template to see how to execute every query.
-   
-Made by: Mateo Montoya Ospina and Juan Pablo Lopez Lidueña
 
 ```bash
 # 1) Clone and enter the repo
@@ -419,5 +419,5 @@ cd practice2-logical-programming-prolog
     ctrl + c
     press e to exit
     cd ..
-'''
-
+```
+Made by: Mateo Montoya Ospina and Juan Pablo Lopez Lidueña
