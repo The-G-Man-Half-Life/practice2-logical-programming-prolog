@@ -1,4 +1,4 @@
-:- module(,[
+:- module(main,[
     print_All/2,
     print_All/4,
     print_Cheapest/2,

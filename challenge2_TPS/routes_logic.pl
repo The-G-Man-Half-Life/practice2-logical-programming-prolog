@@ -20,6 +20,7 @@ routes(Origin, Destiny, Visited, [segment(Origin, Stepover, Transport, Segment_C
     route(Origin, Stepover, Transport, Departure_Time, Arrival_Time, Segment_Cost, si),
     % To avoid loops we check the next stepover with the array:
     \+ member(Stepover, Visited),
+    \+ member(Destiny, Visited),
     routes(Stepover, Destiny, [Stepover | Visited], Route, Remaining_Cost, Remaining_Time),
     % Calculate Cost & Time
     Total_Cost is
