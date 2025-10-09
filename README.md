@@ -3,26 +3,30 @@
 This project contains 2 distinct modules both having distinct knowledge databases and different queries that try to answer some common petitions that an user could have related to the information contained inside the knowledge databases being the first focused on computing platforms and the second one focused on trips and travels.
 
 ## Contents
-
 - `challenge1_database`
   - `src`
     - `complexQueries`
-      - 
-    - `queries` 
-  - `P3_2_NumericalMethods/`
-    - `cosineFunction.hs` 
-    - `exponentialFunction.hs` 
-    - `naturalLogarithm.hs`
-  - `P3_3_DSPT/`
-    - `discreteCosine.hs` 
-- `documents/`
-    - `cosineTest.hs` 
-    - `expTest.hs` 
-    - `naturalLogarithmTest.hs`
-    - `DCTTest.hs`
-- `Video/` 
-    - `VideoLink.txt`
-- `README.md` 
+      - `bestCPAfter2023.pl`
+      - `mostCommCPUGPUManComb.pl`
+      - `mostCommRamVRamInGBComb.pl`
+      - `worstCPBefore2023.pl`
+    - `queries`
+      - `amdAfter2021.pl`
+      - `amountOfCPASUS.pl`
+      - `cpHDBetween.pl`
+      - `laptopsRamHD.pl`
+      - `tablet2PlusGBRam.pl`
+    - `facts.pl`
+  - `main.pl`
+ - `challenge2_TPS`
+    - `filters_Optimals.pl`
+    - `main.pl`
+    - `outputs.pl`
+    - `route_facts.pl`
+    - `routes_logic.pl`
+  - `video`
+    - `link.txt`
+  - `README.md`
 
 ## Program Functionalities
 
@@ -98,29 +102,18 @@ This project contains 2 distinct modules both having distinct knowledge database
   to the conditions given then all of them are gathered in a list and and with
   the list of computing platforms all these informations are printed.
 
-
-### 2) P3_2_NumericalMethods
-- **cosineFunction.hs**  
-  Calculates `cos(x)` by summing a finite number of terms of its series.  
-
-- **exponentialFunction.hs**  
-  Calculates `e^x` with a multiple summatory.  
-
-- **naturalLogarithm.hs**  
-  Approximates `ln(1 + x)` (valid for `-1 < x ≤ 1`).  
-
 ## Problems and errors during the development
 
 ### complexQueries
 
 **bestCPAfter2023.pl**  
-- determining how to properly measure which devices are better than the
+- Determining how to properly measure which devices are better than the
   other ones.
-- understanding what score to give to each characteristic based on its
+- Understanding what score to give to each characteristic based on its
   importance for the device.
-- making the logic behind the recursive method to choose the computing
+- Making the logic behind the recursive method to choose the computing
   platform with the highest punctuation.
-- joining all of the queries to make the main query work.
+- Joining all of the queries to make the main query work.
 - Deciding how to display all of the gathered information so it can be
   visually attractive
 
@@ -131,7 +124,7 @@ This project contains 2 distinct modules both having distinct knowledge database
 - Designing the countOcurrences method so it could return the amount
   of counts for each CPU/GPU manufacturer combination and also be the
   backbone of the main query.
-- finding out how to join all of the queries in the main one to make
+- Finding out how to join all of the queries in the main one to make
   everything work.
  **mostCommRamVRamInGBComb.pl**  
 - Trying to make all of the functions generally usable not matter the
@@ -150,53 +143,29 @@ This project contains 2 distinct modules both having distinct knowledge database
 ### queries
 
 **amdAfter2021.pl**  
-  - discovering the appropiate ways to print information implementing
+  - Discovering the appropiate ways to print information implementing
     recursion.
 
 **amountOfCPASUS.pl**  
-  - naming the file. as the Brand is named ASUS and not Asus but it
+  - Naming the file. as the Brand is named ASUS and not Asus but it
     could be misunderstood so it was decided to leave it in its normal
     format as it is generally understood as the trademark.
-  - making the function to count the amount of items that were gathered
+  - Making the function to count the amount of items that were gathered
     during the proccess as this one had a different proccess of recursion.
 
 **cpHDBetween.pl**  
-  - naming the file briefly and understandable as the goal of this
+  - Naming the file briefly and understandable as the goal of this
     file is quite large to explain in a short file name format.
 
 **laptopsRamHD.pl**  
-  - making the most visually appealing the header of the print list function
+  - Making the most visually appealing the header of the print list function
     becase the original names were too large for each category so it was
     necessary to find some short names.
 
 - **tablet2PlusGBRam.pl**  
   - Having to change the knowledge database as there were not enough tablets
     to make this query visibly good enough.
-  
-### 2) P3_2_NumericalMethods
-- **cosineFunction.hs**  
-   - Handling how fast were the numbers increasing
-     due to the cosine inside the program because
-     these values could return infinite or crash
-     the device.
-   - Organizing the functions to make the main
-     function execute properly.
-   - Making that the tests run properly.
-     
-- **exponentialFunction.hs**  
-   - Problems related to how to divide properly
-     the multiple functions involucrated in the
-     main function.
-   - Problems related to what could happen with
-     negative exponents.
-   - Problems related to how to include constant
-     values without requesting them from users.
-   - Problem related about deciding the stopping
-     functions for the auxiliar functions.
-   - Understanding how to reduce pi properly.
-     
-- **naturalLogarithm.hs**  
-   - Organizing properly the functions.
+
       
 ### General problems throught the development
 
@@ -263,10 +232,8 @@ This project contains 2 distinct modules both having distinct knowledge database
     of each other.
   - Good expression and communication was vital to make a
     good video.
-
-## tests
-These are all of the results after using the queries with
-the knowledge database:
+```bash
+## tests 
 Output of `amdAfter2021PrintList/0`
 --------------------------------------------
 Trademark | Name | Serial number | Year of acquisition
@@ -409,20 +376,20 @@ Type of Computing Platform: laptop
 VRam Capacity in GB: 0
 Total punctuation: 19.872
 --------------------------------------------
-
+```
 ## Prerequisites to execute this repository
--SWI‑Prolog (recommended >= 8.0). https://www.swi-prolog.org/Download.html
--Visual Studio Code. https://code.visualstudio.com/download
--Have stablished and set up everything for Prolog
+- SWI‑Prolog (recommended >= 8.0). https://www.swi-prolog.org/Download.html
+- Visual Studio Code. https://code.visualstudio.com/download
+- Have stablished and set up everything for Prolog
 
 ## Where to Use
 - It can be used in the Prolog own terminal or preferably use the
 powershell or VSC code terminal for better watch of code and execution.
 
 ## How to Use
-1. Watch the bash template to see how to execute every query.
+- Watch the bash template to see how to execute every query.
    
-Made by: Mateo Montoya Ospina y Juan Pablo Lopez Lidueña
+Made by: Mateo Montoya Ospina and Juan Pablo Lopez Lidueña
 
 ```bash
 # 1) Clone and enter the repo
@@ -452,6 +419,5 @@ cd practice2-logical-programming-prolog
     ctrl + c
     press e to exit
     cd ..
+'''
 
-# 3) P3_2_NumericalMethods
-cd Src\P3_2_NumericalMethods
