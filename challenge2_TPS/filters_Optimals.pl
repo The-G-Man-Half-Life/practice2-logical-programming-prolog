@@ -1,6 +1,6 @@
 :- module(filters_Optimals, [
     filter_Departure_Time/4,
-    find_optimal/3
+    find_Optimal/3
 ]).
 
 
