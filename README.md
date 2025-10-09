@@ -32,7 +32,7 @@ This project contains 2 distinct modules both having distinct knowledge database
 
 ### 1) challenge1_database
 
-### complexQueries
+#### complexQueries
 
 - **bestCPAfter2023.pl**  
   Takes care of finding the best computing platform after 2023 from facts.pl
@@ -65,7 +65,7 @@ This project contains 2 distinct modules both having distinct knowledge database
   by using a function that sort from lowest to highest we take the first item
   which is the worst according to the punctuation system given.
 
-### queries
+#### queries
 
 - **amdAfter2021.pl**  
   Takes care of finding all the computing platforms with AMD CPU after 2021
@@ -101,6 +101,48 @@ This project contains 2 distinct modules both having distinct knowledge database
   This is achieved by only choosing those computing platforms that go according
   to the conditions given then all of them are gathered in a list and and with
   the list of computing platforms all these informations are printed.
+
+### 2) challenge2_TPS
+
+This module represents a **Travel Planning System (TPS)** implemented in Prolog.
+It calculates all possible travel routes between two cities, including direct trips and multi-step routes, while showing total cost and duration. It also includes filters to find routes within specific time ranges or by cheapest/fastest criteria.
+
+#### Files and their roles
+
+- **route_facts.pl**  
+  Contains the knowledge base with all available travel routes, including origin, destination, transport type, departure time, arrival time, cost, and availability.
+
+- **routes_logic.pl**  
+  Defines the recursive logic that finds both direct and multi-stop routes.  
+  It uses a “Visited” list to prevent loops and sums up the total cost and travel time.
+
+- **filters_Optimals.pl**  
+  Implements filters to only include routes within specific departure time windows and functions to determine the cheapest or fastest available route.
+
+- **outputs.pl**  
+  Handles all user-facing outputs, such as formatted printing of route segments, total costs, and total travel times.
+
+- **main.pl**  
+  The main module that ties all others together. It provides easy-to-use commands for users to query and print all routes, or find the cheapest or fastest options.
+
+#### Example Queries and Outputs for challenge2_TPS
+
+```prolog
+  % Load main module
+  ?- [main].
+
+  % List all available routes between two cities
+  ?- print_All(bogota, medellin).
+
+  % List routes within a departure time range (6 to 12)
+  ?- print_All(bogota, medellin, 6, 12).
+
+  % Find the cheapest available route between two cities
+  ?- print_Cheapest(bogota, cartagena).
+
+  % Find the fastest available route between two cities
+  ?- print_Fastest(bogota, cartagena).
+```
 
 ## Problems and errors during the development
 
@@ -165,6 +207,13 @@ This project contains 2 distinct modules both having distinct knowledge database
 - **tablet2PlusGBRam.pl**  
   - Having to change the knowledge database as there were not enough tablets
     to make this query visibly good enough.
+
+### challenge2_TPS
+
+- Debugging variable scope issues in `findall/3` and ensuring that cost and time accumulated correctly through recursion.
+- Building filtering functions that use true/false return logic (instead of cuts) to allow declarative filtering by departure time.
+- Creating formatted outputs using `format/2` for readability in the terminal.
+- Handling syntax errors and directory navigation issues when running from the SWI-Prolog console inside a virtual machine.
 
       
 ### General problems throught the development
@@ -378,7 +427,47 @@ Type of Computing Platform: laptop
 VRam Capacity in GB: 0
 Total punctuation: 19.872
 --------------------------------------------
+
+Output of `print_All(bogota, medellin)`
+--------------------------------------------
+bogota (avion, 8->9, 100.0 USD)--> medellin
+---
+Costo Total: 100
+Tiempo: 1h
+--------------------------------------------
+bogota (bus, 6->16, 40.0 USD)--> medellin
+---
+Costo Total: 40
+Tiempo: 10h
+--------------------------------------------
+
+Output of `print_All(bogota, medellin, 6, 12)`
+--------------------------------------------
+bogota (avion, 8->9, 100.0 USD)--> medellin
+---
+Costo Total: 100
+Tiempo: 1h
+--------------------------------------------
+
+Output of `print_Cheapest(bogota, cartagena)`
+--------------------------------------------
+bogota (bus, 6->16, 40.0 USD)--> medellin
+medellin (bus, 7->19, 42.0 USD)--> cartagena
+---
+Costo Total: 82
+Tiempo: 22h
+--------------------------------------------
+
+Output of `print_Fastest(bogota, cartagena)`
+--------------------------------------------
+bogota (avion, 8->9, 100.0 USD)--> medellin
+medellin (bus, 7->19, 42.0 USD)--> cartagena
+---
+Costo Total: 142
+Tiempo: 13h
+--------------------------------------------
 ```
+
 ## Prerequisites to execute this repository
 - SWI‑Prolog (recommended >= 8.0). https://www.swi-prolog.org/Download.html
 - Visual Studio Code. https://code.visualstudio.com/download
@@ -393,31 +482,46 @@ powershell or VSC code terminal for better watch of code and execution.
 
 ```bash
 # 1) Clone and enter the repo
-git clone The-G-Man-Half-Life/practice2-logical-programming-prolog
-cd practice2-logical-programming-prolog
+  git clone The-G-Man-Half-Life/practice2-logical-programming-prolog
+  cd practice2-logical-programming-prolog
 
-    # 2) enter challenge 1 database queries
-    cd challenge1_database
-    
-    # To use both queries and complex queries
-    swipl main.pl
-    
-    # To execute the queries
-    ?- amdAfter2021PrintList.
-    ?- amountOfCPASUSPrintList.
-    ?- cpHDBetweenPrintList.
-    ?- laptopsRamHDPrintList.
-    ?- tablet2PlusGBRamPrintList.
-    
-    # To execute the complex queries
-    ?- bestComputingPlatformPrint.
-    ?- allBrandsMostCommonPrintList.
-    ?- ramVRamMostCommonComboPrint.
-    ?- worstComputingPlatformPrint.
-    
-    # To go back to the root :
-    ctrl + c
-    press e to exit
-    cd ..
+# 2) enter challenge 1 database queries
+  cd challenge1_database
+  
+  # To use both queries and complex queries
+  swipl main.pl
+  
+  # To execute the queries
+  ?- amdAfter2021PrintList.
+  ?- amountOfCPASUSPrintList.
+  ?- cpHDBetweenPrintList.
+  ?- laptopsRamHDPrintList.
+  ?- tablet2PlusGBRamPrintList.
+  
+  # To execute the complex queries
+  ?- bestComputingPlatformPrint.
+  ?- allBrandsMostCommonPrintList.
+  ?- ramVRamMostCommonComboPrint.
+  ?- worstComputingPlatformPrint.
+  
+  # To go back to the root :
+  ctrl + c
+  press e to exit
+  cd ..
+
+# 3) Enter challenge 2 Travel Planning System (TPS)
+  cd challenge2_TPS
+
+  # Load the main module
+  swipl main.pl
+
+  # Run example queries:
+  ?- print_All(bogota, medellin).
+  ?- print_All(bogota, medellin, 6, 7).
+  ?- print_Cheapest(bogota, santa_marta).
+  ?- print_Fastest(bogota, santa_marta).
+
+  # To exit Prolog:
+  ?- halt.
 ```
 Made by: Mateo Montoya Ospina and Juan Pablo Lopez Lidueña
