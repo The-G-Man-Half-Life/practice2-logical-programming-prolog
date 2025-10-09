@@ -3,32 +3,36 @@
 This project contains 2 distinct modules both having distinct knowledge databases and different queries that try to answer some common petitions that an user could have related to the information contained inside the knowledge databases being the first focused on computing platforms and the second one focused on trips and travels.
 
 ## Contents
-
 - `challenge1_database`
   - `src`
     - `complexQueries`
-      - 
-    - `queries` 
-  - `P3_2_NumericalMethods/`
-    - `cosineFunction.hs` 
-    - `exponentialFunction.hs` 
-    - `naturalLogarithm.hs`
-  - `P3_3_DSPT/`
-    - `discreteCosine.hs` 
-- `documents/`
-    - `cosineTest.hs` 
-    - `expTest.hs` 
-    - `naturalLogarithmTest.hs`
-    - `DCTTest.hs`
-- `Video/` 
-    - `VideoLink.txt`
-- `README.md` 
+      - `bestCPAfter2023.pl`
+      - `mostCommCPUGPUManComb.pl`
+      - `mostCommRamVRamInGBComb.pl`
+      - `worstCPBefore2023.pl`
+    - `queries`
+      - `amdAfter2021.pl`
+      - `amountOfCPASUS.pl`
+      - `cpHDBetween.pl`
+      - `laptopsRamHD.pl`
+      - `tablet2PlusGBRam.pl`
+    - `facts.pl`
+  - `main.pl`
+ - `challenge2_TPS`
+    - `filters_Optimals.pl`
+    - `main.pl`
+    - `outputs.pl`
+    - `route_facts.pl`
+    - `routes_logic.pl`
+  - `video`
+    - `link.txt`
+  - `README.md`
 
 ## Program Functionalities
 
 ### 1) challenge1_database
 
-### complexQueries
+#### complexQueries
 
 - **bestCPAfter2023.pl**  
   Takes care of finding the best computing platform after 2023 from facts.pl
@@ -61,7 +65,7 @@ This project contains 2 distinct modules both having distinct knowledge database
   by using a function that sort from lowest to highest we take the first item
   which is the worst according to the punctuation system given.
 
-### queries
+#### queries
 
 - **amdAfter2021.pl**  
   Takes care of finding all the computing platforms with AMD CPU after 2021
@@ -98,29 +102,60 @@ This project contains 2 distinct modules both having distinct knowledge database
   to the conditions given then all of them are gathered in a list and and with
   the list of computing platforms all these informations are printed.
 
+### 2) challenge2_TPS
 
-### 2) P3_2_NumericalMethods
-- **cosineFunction.hs**  
-  Calculates `cos(x)` by summing a finite number of terms of its series.  
+This module represents a **Travel Planning System (TPS)** implemented in Prolog.
+It calculates all possible travel routes between two cities, including direct trips and multi-step routes, while showing total cost and duration. It also includes filters to find routes within specific time ranges or by cheapest/fastest criteria.
 
-- **exponentialFunction.hs**  
-  Calculates `e^x` with a multiple summatory.  
+#### Files and their roles
 
-- **naturalLogarithm.hs**  
-  Approximates `ln(1 + x)` (valid for `-1 < x ≤ 1`).  
+- **route_facts.pl**  
+  Contains the knowledge base with all available travel routes, including origin, destination, transport type, departure time, arrival time, cost, and availability.
+
+- **routes_logic.pl**  
+  Defines the recursive logic that finds both direct and multi-stop routes.  
+  It uses a “Visited” list to prevent loops and sums up the total cost and travel time.
+
+- **filters_Optimals.pl**  
+  Implements filters to only include routes within specific departure time windows and functions to determine the cheapest or fastest available route.
+
+- **outputs.pl**  
+  Handles all user-facing outputs, such as formatted printing of route segments, total costs, and total travel times.
+
+- **main.pl**  
+  The main module that ties all others together. It provides easy-to-use commands for users to query and print all routes, or find the cheapest or fastest options.
+
+#### Example Queries and Outputs for challenge2_TPS
+
+```prolog
+  % Load main module
+  ?- [main].
+
+  % List all available routes between two cities
+  ?- print_All(bogota, medellin).
+
+  % List routes within a departure time range (6 to 12)
+  ?- print_All(bogota, medellin, 6, 12).
+
+  % Find the cheapest available route between two cities
+  ?- print_Cheapest(bogota, cartagena).
+
+  % Find the fastest available route between two cities
+  ?- print_Fastest(bogota, cartagena).
+```
 
 ## Problems and errors during the development
 
 ### complexQueries
 
 **bestCPAfter2023.pl**  
-- determining how to properly measure which devices are better than the
+- Determining how to properly measure which devices are better than the
   other ones.
-- understanding what score to give to each characteristic based on its
+- Understanding what score to give to each characteristic based on its
   importance for the device.
-- making the logic behind the recursive method to choose the computing
+- Making the logic behind the recursive method to choose the computing
   platform with the highest punctuation.
-- joining all of the queries to make the main query work.
+- Joining all of the queries to make the main query work.
 - Deciding how to display all of the gathered information so it can be
   visually attractive
 
@@ -131,7 +166,7 @@ This project contains 2 distinct modules both having distinct knowledge database
 - Designing the countOcurrences method so it could return the amount
   of counts for each CPU/GPU manufacturer combination and also be the
   backbone of the main query.
-- finding out how to join all of the queries in the main one to make
+- Finding out how to join all of the queries in the main one to make
   everything work.
  **mostCommRamVRamInGBComb.pl**  
 - Trying to make all of the functions generally usable not matter the
@@ -150,53 +185,36 @@ This project contains 2 distinct modules both having distinct knowledge database
 ### queries
 
 **amdAfter2021.pl**  
-  - discovering the appropiate ways to print information implementing
+  - Discovering the appropiate ways to print information implementing
     recursion.
 
 **amountOfCPASUS.pl**  
-  - naming the file. as the Brand is named ASUS and not Asus but it
+  - Naming the file. as the Brand is named ASUS and not Asus but it
     could be misunderstood so it was decided to leave it in its normal
     format as it is generally understood as the trademark.
-  - making the function to count the amount of items that were gathered
+  - Making the function to count the amount of items that were gathered
     during the proccess as this one had a different proccess of recursion.
 
 **cpHDBetween.pl**  
-  - naming the file briefly and understandable as the goal of this
+  - Naming the file briefly and understandable as the goal of this
     file is quite large to explain in a short file name format.
 
 **laptopsRamHD.pl**  
-  - making the most visually appealing the header of the print list function
+  - Making the most visually appealing the header of the print list function
     becase the original names were too large for each category so it was
     necessary to find some short names.
 
 - **tablet2PlusGBRam.pl**  
   - Having to change the knowledge database as there were not enough tablets
     to make this query visibly good enough.
-  
-### 2) P3_2_NumericalMethods
-- **cosineFunction.hs**  
-   - Handling how fast were the numbers increasing
-     due to the cosine inside the program because
-     these values could return infinite or crash
-     the device.
-   - Organizing the functions to make the main
-     function execute properly.
-   - Making that the tests run properly.
-     
-- **exponentialFunction.hs**  
-   - Problems related to how to divide properly
-     the multiple functions involucrated in the
-     main function.
-   - Problems related to what could happen with
-     negative exponents.
-   - Problems related to how to include constant
-     values without requesting them from users.
-   - Problem related about deciding the stopping
-     functions for the auxiliar functions.
-   - Understanding how to reduce pi properly.
-     
-- **naturalLogarithm.hs**  
-   - Organizing properly the functions.
+
+### challenge2_TPS
+
+- Debugging variable scope issues in `findall/3` and ensuring that cost and time accumulated correctly through recursion.
+- Building filtering functions that use true/false return logic (instead of cuts) to allow declarative filtering by departure time.
+- Creating formatted outputs using `format/2` for readability in the terminal.
+- Handling syntax errors and directory navigation issues when running from the SWI-Prolog console inside a virtual machine.
+
       
 ### General problems throught the development
 
@@ -263,10 +281,10 @@ This project contains 2 distinct modules both having distinct knowledge database
     of each other.
   - Good expression and communication was vital to make a
     good video.
+    
+## tests 
 
-## tests
-These are all of the results after using the queries with
-the knowledge database:
+```bash
 Output of `amdAfter2021PrintList/0`
 --------------------------------------------
 Trademark | Name | Serial number | Year of acquisition
@@ -410,48 +428,100 @@ VRam Capacity in GB: 0
 Total punctuation: 19.872
 --------------------------------------------
 
+Output of `print_All(bogota, medellin)`
+--------------------------------------------
+bogota (avion, 8->9, 100.0 USD)--> medellin
+---
+Costo Total: 100
+Tiempo: 1h
+--------------------------------------------
+bogota (bus, 6->16, 40.0 USD)--> medellin
+---
+Costo Total: 40
+Tiempo: 10h
+--------------------------------------------
+
+Output of `print_All(bogota, medellin, 6, 12)`
+--------------------------------------------
+bogota (avion, 8->9, 100.0 USD)--> medellin
+---
+Costo Total: 100
+Tiempo: 1h
+--------------------------------------------
+
+Output of `print_Cheapest(bogota, cartagena)`
+--------------------------------------------
+bogota (bus, 6->16, 40.0 USD)--> medellin
+medellin (bus, 7->19, 42.0 USD)--> cartagena
+---
+Costo Total: 82
+Tiempo: 22h
+--------------------------------------------
+
+Output of `print_Fastest(bogota, cartagena)`
+--------------------------------------------
+bogota (avion, 8->9, 100.0 USD)--> medellin
+medellin (bus, 7->19, 42.0 USD)--> cartagena
+---
+Costo Total: 142
+Tiempo: 13h
+--------------------------------------------
+```
+
 ## Prerequisites to execute this repository
--SWI‑Prolog (recommended >= 8.0). https://www.swi-prolog.org/Download.html
--Visual Studio Code. https://code.visualstudio.com/download
--Have stablished and set up everything for Prolog
+- SWI‑Prolog (recommended >= 8.0). https://www.swi-prolog.org/Download.html
+- Visual Studio Code. https://code.visualstudio.com/download
+- Have stablished and set up everything for Prolog
 
 ## Where to Use
 - It can be used in the Prolog own terminal or preferably use the
 powershell or VSC code terminal for better watch of code and execution.
 
 ## How to Use
-1. Watch the bash template to see how to execute every query.
-   
-Made by: Mateo Montoya Ospina y Juan Pablo Lopez Lidueña
+- Watch the bash template to see how to execute every query.
 
 ```bash
 # 1) Clone and enter the repo
-git clone The-G-Man-Half-Life/practice2-logical-programming-prolog
-cd practice2-logical-programming-prolog
+  git clone The-G-Man-Half-Life/practice2-logical-programming-prolog
+  cd practice2-logical-programming-prolog
 
-    # 2) enter challenge 1 database queries
-    cd challenge1_database
-    
-    # To use both queries and complex queries
-    swipl main.pl
-    
-    # To execute the queries
-    ?- amdAfter2021PrintList.
-    ?- amountOfCPASUSPrintList.
-    ?- cpHDBetweenPrintList.
-    ?- laptopsRamHDPrintList.
-    ?- tablet2PlusGBRamPrintList.
-    
-    # To execute the complex queries
-    ?- bestComputingPlatformPrint.
-    ?- allBrandsMostCommonPrintList.
-    ?- ramVRamMostCommonComboPrint.
-    ?- worstComputingPlatformPrint.
-    
-    # To go back to the root :
-    ctrl + c
-    press e to exit
-    cd ..
+# 2) enter challenge 1 database queries
+  cd challenge1_database
+  
+  # To use both queries and complex queries
+  swipl main.pl
+  
+  # To execute the queries
+  ?- amdAfter2021PrintList.
+  ?- amountOfCPASUSPrintList.
+  ?- cpHDBetweenPrintList.
+  ?- laptopsRamHDPrintList.
+  ?- tablet2PlusGBRamPrintList.
+  
+  # To execute the complex queries
+  ?- bestComputingPlatformPrint.
+  ?- allBrandsMostCommonPrintList.
+  ?- ramVRamMostCommonComboPrint.
+  ?- worstComputingPlatformPrint.
+  
+  # To go back to the root :
+  ctrl + c
+  press e to exit
+  cd ..
 
-# 3) P3_2_NumericalMethods
-cd Src\P3_2_NumericalMethods
+# 3) Enter challenge 2 Travel Planning System (TPS)
+  cd challenge2_TPS
+
+  # Load the main module
+  swipl main.pl
+
+  # Run example queries:
+  ?- print_All(bogota, medellin).
+  ?- print_All(bogota, medellin, 6, 7).
+  ?- print_Cheapest(bogota, santa_marta).
+  ?- print_Fastest(bogota, santa_marta).
+
+  # To exit Prolog:
+  ?- halt.
+```
+Made by: Mateo Montoya Ospina and Juan Pablo Lopez Lidueña
