@@ -1,5 +1,5 @@
 % To be able to use the route facts in routes logic we use:
-:- module(route_facts, [
+:- module(route_Facts, [
     route/7
 ]).
 

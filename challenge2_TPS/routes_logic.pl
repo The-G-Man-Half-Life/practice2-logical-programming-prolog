@@ -2,8 +2,8 @@
     find_All_Routes/3
 ]).
 
-% "Impirting" Route facts.
-:- use_module(route_facts).
+% "Importing" Route facts.
+:- use_module(route_Facts).
 
 
 
